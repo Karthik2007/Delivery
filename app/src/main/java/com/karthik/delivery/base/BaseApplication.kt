@@ -8,7 +8,7 @@ import com.karthik.delivery.base.di.DaggerAppComponent
 /**
  * created by Karthik A on 09/03/19
  */
-class BaseApplication: Application() {
+class BaseApplication : Application() {
 
     lateinit var appComponent: AppComponent
 

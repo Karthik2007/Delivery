@@ -12,17 +12,14 @@ import dagger.Provides
  * created by Karthik A on 11/03/19
  */
 @Module
-class DeliveryModule
-{
+class DeliveryModule {
     @Provides
-    fun providesDeliveryApi(apiConfiguration: ApiConfiguration): DeliveryApi
-    {
+    fun providesDeliveryApi(apiConfiguration: ApiConfiguration): DeliveryApi {
         return apiConfiguration.getApiInstance(DeliveryApi::class.java)
     }
 
     @Provides
-    fun providesDeliveryRepository(deliveryApi: DeliveryApi, connectionHandler: ConnectionHandler): DeliveryRepository
-    {
+    fun providesDeliveryRepository(deliveryApi: DeliveryApi, connectionHandler: ConnectionHandler): DeliveryRepository {
         return DeliveryRepository(deliveryApi, connectionHandler)
     }
 }

@@ -16,7 +16,10 @@ import kotlinx.coroutines.launch
 /**
  * created by Karthik A on 09/03/19
  */
-class DeliveryListViewModel(private val deliveryRepository: DeliveryRepository, private val connectionHandler: ConnectionHandler) : ViewModel() {
+class DeliveryListViewModel(
+    private val deliveryRepository: DeliveryRepository,
+    private val connectionHandler: ConnectionHandler
+) : ViewModel() {
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -84,11 +87,10 @@ class DeliveryListViewModel(private val deliveryRepository: DeliveryRepository, 
 
         } else {
 
-            if(lastLoadedPage == 0)
-            {
+            if (lastLoadedPage == 0) {
                 _emptyListView.value = true
 
-            }else{
+            } else {
                 _emptyListView.value = false
                 isLastPageReached = true
             }

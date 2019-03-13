@@ -16,15 +16,16 @@ import com.karthik.delivery.deliverylist.data.Delivery
 /**
  * created by Karthik A on 11/03/19
  */
-class DeliveryListAdapter(private val listener: OnItemClickListener):
+class DeliveryListAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<DeliveryListAdapter.DeliveryListItemViewHolder>() {
 
     private var deliveryList: MutableList<Delivery> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, pos: Int): DeliveryListItemViewHolder {
-        var inflater = LayoutInflater.from(parent.context)
 
-        val binding: ListItemDeliveryBinding = DataBindingUtil.inflate(inflater, R.layout.list_item_delivery,parent,false)
+        var inflater = LayoutInflater.from(parent.context)
+        val binding: ListItemDeliveryBinding =
+            DataBindingUtil.inflate(inflater, R.layout.list_item_delivery, parent, false)
 
         return DeliveryListItemViewHolder(binding)
     }
@@ -36,11 +37,8 @@ class DeliveryListAdapter(private val listener: OnItemClickListener):
     override fun onBindViewHolder(holder: DeliveryListItemViewHolder, pos: Int) {
 
         deliveryList[pos].let {
-
             holder.binding.delivery = it
-
             var recipientImageView: ImageView = holder.binding.root.findViewById(R.id.recipient_image)
-
             recipientImageView.loadImage(it.imageUrl)
         }
 
@@ -49,13 +47,12 @@ class DeliveryListAdapter(private val listener: OnItemClickListener):
         }
     }
 
-    fun loadItems(items: List<Delivery>?)
-    {
+    fun loadItems(items: List<Delivery>?) {
         items?.let {
-            deliveryList.addAll( items )
-            notifyItemRangeInserted( deliveryList.size, items.size )
+            deliveryList.addAll(items)
+            notifyItemRangeInserted(deliveryList.size, items.size)
         }
     }
 
-    inner class DeliveryListItemViewHolder(var binding: ListItemDeliveryBinding): RecyclerView.ViewHolder(binding.root)
+    inner class DeliveryListItemViewHolder(var binding: ListItemDeliveryBinding) : RecyclerView.ViewHolder(binding.root)
 }

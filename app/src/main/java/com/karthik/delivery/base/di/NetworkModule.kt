@@ -31,14 +31,17 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesCacheInterceptor(connectionHandler: ConnectionHandler): CacheInterceptor
-    {
+    fun providesCacheInterceptor(connectionHandler: ConnectionHandler): CacheInterceptor {
         return CacheInterceptor(connectionHandler)
     }
 
     @Singleton
     @Provides
-    fun providesApiConfiguration(baseApplication: BaseApplication, baseInterceptor: BaseInterceptor, cacheInterceptor: CacheInterceptor): ApiConfiguration{
+    fun providesApiConfiguration(
+        baseApplication: BaseApplication,
+        baseInterceptor: BaseInterceptor,
+        cacheInterceptor: CacheInterceptor
+    ): ApiConfiguration {
         return ApiConfiguration(baseApplication.applicationContext, baseInterceptor, cacheInterceptor)
     }
 

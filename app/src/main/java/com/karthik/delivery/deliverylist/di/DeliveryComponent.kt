@@ -10,6 +10,5 @@ import dagger.Component
 @DeliveryScope
 @Component(dependencies = [AppComponent::class], modules = [DeliveryModule::class])
 interface DeliveryComponent {
-
     fun injectDependencies(target: DeliveryListActivity)
 }

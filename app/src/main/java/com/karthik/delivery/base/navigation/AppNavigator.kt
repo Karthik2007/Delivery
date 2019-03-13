@@ -16,10 +16,9 @@ import com.karthik.delivery.deliverymap.view.DeliveryMapActivity
 class AppNavigator {
 
 
-    fun goToDeliveryMapActivity(context: Context, data: Delivery)
-    {
+    fun goToDeliveryMapActivity(context: Context, data: Delivery) {
         var intent = Intent(context, DeliveryMapActivity::class.java)
-        intent.putExtra("delivery",data)
+        intent.putExtra("delivery", data)
 
         context.startActivity(intent)
     }

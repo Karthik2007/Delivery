@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_delivery_map.*
 class DeliveryMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
-
     private lateinit var binding: ActivityDeliveryMapBinding
     private var deliveryData: Delivery? = null
 
@@ -34,23 +33,18 @@ class DeliveryMapActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         unWrapIntent()
-
         setUpActionListeners()
     }
 
     private fun setUpActionListeners() {
-
         back_btn.setOnClickListener {
             onBackPressed()
         }
     }
 
     private fun unWrapIntent() {
-
         deliveryData = intent.getParcelableExtra<Delivery>("delivery")
-
-        deliveryData?.let {  showDeliveryCard() }
-
+        deliveryData?.let { showDeliveryCard() }
     }
 
     private fun showDeliveryCard() {
@@ -76,17 +70,12 @@ class DeliveryMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun showDeliveryLocationOnMap(map: GoogleMap?) {
 
         map?.let {
-
             var deliveryLocation = LatLng(deliveryData?.location?.lat!!, deliveryData?.location?.lng!!)
 
-            val marker = map.addMarker(
-                MarkerOptions().position(
-                    deliveryLocation ) )
-
+            val marker = map.addMarker(MarkerOptions().position(deliveryLocation))
             marker.tag = deliveryData
             marker.setAnchor(0.5f, 0.5f)
-
-            map.animateCamera( CameraUpdateFactory.newLatLngZoom(deliveryLocation, 14f) )
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(deliveryLocation, 14f))
         }
 
 

@@ -12,16 +12,13 @@ import okhttp3.Response
  *
  * created by Karthik A on 12/03/19
  */
-class CacheInterceptor(var connectionHandler: ConnectionHandler): Interceptor
-{
+class CacheInterceptor(var connectionHandler: ConnectionHandler) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-
 
         var request = chain.request()
 
-        request = when(connectionHandler.isConnected)
-        {
-            true ->   request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
+        request = when (connectionHandler.isConnected) {
+            true -> request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
             false ->
                 request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=$CACHE_SINCE").build()
         }
@@ -30,7 +27,7 @@ class CacheInterceptor(var connectionHandler: ConnectionHandler): Interceptor
     }
 
     private companion object {
-        const val CACHE_SINCE = 60 * 60 * 24 * 7
+        const val CACHE_SINCE = 60 * 60 * 24 * 7  // 7 days
     }
 
 }

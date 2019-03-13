@@ -23,7 +23,6 @@ import javax.inject.Inject
 class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
 
 
-
     private lateinit var deliveryListViewModelFactory: DeliveryListViewModelFactory
     private lateinit var deliveryListViewModel: DeliveryListViewModel
     private lateinit var appNavigator: AppNavigator
@@ -35,7 +34,8 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
 
         initDagger()
 
-        deliveryListViewModel = ViewModelProviders.of(this, deliveryListViewModelFactory).get(DeliveryListViewModel::class.java)
+        deliveryListViewModel =
+            ViewModelProviders.of(this, deliveryListViewModelFactory).get(DeliveryListViewModel::class.java)
 
         setUpDeliveryList()
         setupObservers()
@@ -67,7 +67,12 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
                 val visibleItemCount = layoutManager.childCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
 
-                deliveryListViewModel.onScrolledToBottom(visibleItemCount, lastVisibleItem, totalItemCount, swipe_container.isRefreshing)
+                deliveryListViewModel.onScrolledToBottom(
+                    visibleItemCount,
+                    lastVisibleItem,
+                    totalItemCount,
+                    swipe_container.isRefreshing
+                )
             }
         })
     }
@@ -87,7 +92,7 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun setupObservers() {
 
-        deliveryListViewModel.deliveryResult.observe(this, Observer{
+        deliveryListViewModel.deliveryResult.observe(this, Observer {
             deliveryListAdapter.loadItems(it)
             delivery_recycler_view.scheduleLayoutAnimation()
         })
@@ -97,16 +102,16 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
         })
 
         deliveryListViewModel.noInternetOrError.observe(this, Observer {
-            broken_view.visibility = if(it!!) View.VISIBLE else View.GONE
+            broken_view.visibility = if (it!!) View.VISIBLE else View.GONE
         })
 
         deliveryListViewModel.offline.observe(this, Observer {
 
-            if(it!!) Toast.makeText(applicationContext, getString(R.string.offline_message), Toast.LENGTH_LONG).show()
+            if (it!!) Toast.makeText(applicationContext, getString(R.string.offline_message), Toast.LENGTH_LONG).show()
         })
 
         deliveryListViewModel.emptyListView.observe(this, Observer {
-            empty_view.visibility = if(it!!) View.VISIBLE else View.GONE
+            empty_view.visibility = if (it!!) View.VISIBLE else View.GONE
         })
 
     }
