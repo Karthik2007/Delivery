@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Delivery</string>
+    <string name="delivery_list_label">Things to Deliver!</string>
+    <string name="broken_link">Oops! Winter is coming</string>
+    <string name="empty_list">Awesome. You have delivered everything.</string>
+    <string name="retry">Retry</string>
+    <string name="offline_message">Internet is not connected. You are seeing this delivery list from Offline cache.</string>
+</resources>
