@@ -75,6 +75,11 @@ class DeliveryViewModelTest {
             CoroutineScope(Dispatchers.Main)
         )
 
+        FieldSetter.setField(
+            deliveryListViewModel, deliveryListViewModel.javaClass.getDeclaredField("lastLoadedPage"),
+            1
+        )
+
 
     }
 

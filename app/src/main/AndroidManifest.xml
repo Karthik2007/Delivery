@@ -17,36 +17,37 @@
             tools:ignore="GoogleAppIndexingWarning">
         <activity
                 android:name=".base.view.splash.SplashActivity"
-                android:theme="@style/AppTheme.Splash">
+                android:theme="@style/AppTheme.Splash"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".deliverylist.view.DeliveryListActivity"
                   android:theme="@style/AppTheme"
+                  android:screenOrientation="portrait"
                   android:label="@string/delivery_list_label">
         </activity>
 
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="@string/google_maps_key" />
+                android:value="@string/google_maps_key"/>
 
-    <activity android:name=".deliverymap.view.DeliveryMapActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
-                android:launchMode="singleTop">
+        <activity android:name=".deliverymap.view.DeliveryMapActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar.TransparentStatusBar"
+                  android:launchMode="singleTop">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".deliverylist.view.DeliveryListActivity" />
+                    android:value=".deliverylist.view.DeliveryListActivity"/>
         </activity>
 
 
         <uses-library
                 android:name="org.apache.http.legacy"
-                android:required="false" />
+                android:required="false"/>
     </application>
 
 </manifest>
