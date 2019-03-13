@@ -99,7 +99,8 @@ class DeliveryListViewModel(
 
     fun checkInternetConnection() {
 
-        _offline.value = !connectionHandler.isConnected
+        if(lastLoadedPage == 1)
+            _offline.value = !connectionHandler.isConnected
     }
 
     private fun handleFetchDeliveriesFailure(failure: Failure) {

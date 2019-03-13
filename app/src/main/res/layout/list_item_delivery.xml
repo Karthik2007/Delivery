@@ -65,9 +65,12 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
-                    android:text='@{"#"+ delivery.id + delivery.description}'
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:maxEms="14"
+                    android:text='@{"#"+ delivery.id +" "+ delivery.description}'
                     android:textColor="@color/colorTextLight"
-                    tools:text="This is description about the item"
+                    tools:text="This is description about the item and more and more"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/divider"
                     app:layout_constraintTop_toTopOf="@+id/divider"/>
