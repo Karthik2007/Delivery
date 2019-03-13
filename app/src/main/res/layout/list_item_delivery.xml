@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:clipToPadding="true"
-            app:cardBackgroundColor="@color/cardBackground">
+            android:clipToPadding="true">
 
 
         <android.support.constraint.ConstraintLayout
@@ -53,7 +52,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginStart="80dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/colorTextLight"
+                    android:background="@color/colorAccent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
@@ -65,8 +64,8 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
-                    android:text='@{"#"+ delivery.id + delivery.description}'
-                    android:textColor="@color/colorTextLight"
+                    android:text='@{delivery.description + " #"+delivery.id}'
+                    android:textColor="@color/colorAccent"
                     tools:text="This is description about the item"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/divider"
@@ -79,7 +78,7 @@
                     android:id="@+id/delivery_address"
                     android:text="@{delivery.location.address}"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/colorTextLight"
+                    android:textColor="@color/colorAccent"
                     app:layout_constraintTop_toBottomOf="@+id/delivery_desc"
                     app:layout_constraintStart_toStartOf="@id/delivery_desc"/>
 
@@ -89,7 +88,7 @@
                     android:text="&#8250;"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorTextLight"
+                    android:textColor="@color/colorAccent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

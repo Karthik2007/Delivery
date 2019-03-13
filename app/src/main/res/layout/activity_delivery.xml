@@ -3,8 +3,7 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/colorAccent">
+                                             android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -17,7 +16,7 @@
             android:layout_width="match_parent"
             android:elevation="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorAccent"
+            android:background="?attr/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay"
     >
 
@@ -25,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delivery_list_label"
+                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:layout_gravity="center"
                 android:id="@+id/toolbar_title" />
@@ -69,6 +69,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary"
                 android:src="@drawable/ic_ghosts"/>
 
         <TextView
@@ -77,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/empty_list"
-                android:textColor="@color/colorTextLight"/>
+                android:textColor="@color/colorPrimary"/>
 
     </LinearLayout>
 
@@ -98,7 +99,6 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:tint="@color/colorTextLight"
                 android:src="@drawable/ic_broken_link"/>
 
         <TextView
@@ -107,18 +107,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/broken_link"
-                android:textColor="@color/colorTextLight"/>
+                android:textColor="@color/colorPrimary"/>
 
         <Button
                 android:layout_gravity="center"
                 android:id="@+id/retry_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorTextLight"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:text="@string/retry"
                 android:textAllCaps="false"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorTextLight"/>
     </LinearLayout>
 
 
