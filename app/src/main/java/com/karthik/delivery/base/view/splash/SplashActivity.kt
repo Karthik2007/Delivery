@@ -12,11 +12,14 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
+    private lateinit var splashHandler: Handler
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        Handler().postDelayed({
+        splashHandler = Handler()
+
+        splashHandler.postDelayed({
             startActivity(Intent(applicationContext, DeliveryListActivity::class.java))
             finish()
         }, 5000)
@@ -27,6 +30,12 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         animateSplashImage()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        splashHandler.removeCallbacks(null)
     }
 
 
