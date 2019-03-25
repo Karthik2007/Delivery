@@ -45,7 +45,9 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun setupActionListeners() {
 
-        swipe_container.isEnabled = false
+        swipe_container.setOnRefreshListener {
+            deliveryListViewModel.onPullToRefresh()
+        }
 
         setupScrollListener()
 
@@ -93,7 +95,13 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
     private fun setupObservers() {
 
         deliveryListViewModel.deliveryResult.observe(this, Observer {
-            deliveryListAdapter.loadItems(it)
+
+            if (it?.page == 1) {
+                deliveryListAdapter.setItems(it.delivery)
+            } else {
+                deliveryListAdapter.loadMoreItems(it?.delivery)
+            }
+
             delivery_recycler_view.scheduleLayoutAnimation()
         })
 

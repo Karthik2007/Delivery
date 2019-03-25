@@ -21,3 +21,6 @@ data class Location(
     val lng: Double,
     val address: String
 ) : Parcelable
+
+@Parcelize
+data class DeliveryResponse(var page: Int, var delivery: List<Delivery>?): Parcelable

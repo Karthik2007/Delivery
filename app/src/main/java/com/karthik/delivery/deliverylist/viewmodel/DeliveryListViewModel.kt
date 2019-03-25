@@ -6,7 +6,9 @@ import android.arch.lifecycle.ViewModel
 import com.karthik.delivery.base.network.ConnectionHandler
 import com.karthik.delivery.base.util.Failure
 import com.karthik.delivery.deliverylist.data.Delivery
+import com.karthik.delivery.deliverylist.data.DeliveryApi
 import com.karthik.delivery.deliverylist.data.DeliveryRepository
+import com.karthik.delivery.deliverylist.data.DeliveryResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -27,14 +29,9 @@ class DeliveryListViewModel(
     private var lastLoadedPage = 0
     private var isLastPageReached = false
 
-    private val offset: Int
-        get() {
-            return lastLoadedPage * 20
-        }
-
     //Delivery response data holder
-    private val _deliveryResult = MutableLiveData<List<Delivery>>()
-    val deliveryResult: LiveData<List<Delivery>>
+    private val _deliveryResult = MutableLiveData<DeliveryResponse>()
+    val deliveryResult: LiveData<DeliveryResponse>
         get() = _deliveryResult
 
     private val _swipeContainer = MutableLiveData<Boolean>()
@@ -55,18 +52,24 @@ class DeliveryListViewModel(
 
 
     init {
-        initiateDeliveryListFetch()
+        initiateDeliveryListFetch(page = 1)
     }
 
-    private fun initiateDeliveryListFetch() {
+
+    fun onPullToRefresh()
+    {
+        initiateDeliveryListFetch(page = 1)
+    }
+
+    private fun initiateDeliveryListFetch(page: Int) {
         _swipeContainer.value = true
-        getDeliveries()
+        getDeliveries(page)
     }
 
-    private fun getDeliveries() {
+    private fun getDeliveries(page: Int) {
         uiScope.launch {
 
-            val result = deliveryRepository.getDeliveries(offset)
+            val result = deliveryRepository.getDeliveries((page -1) * DeliveryApi.ITEMS_PER_PAGE)
 
             result.either(::handleFetchDeliveriesFailure, ::handleFetchDeliveriesSuccess)
 
@@ -76,24 +79,24 @@ class DeliveryListViewModel(
     }
 
 
-    private fun handleFetchDeliveriesSuccess(deliveries: List<Delivery>) {
+    private fun handleFetchDeliveriesSuccess(deliveries: DeliveryResponse) {
 
-        // when result is not empty, last loaded page is incremented to move to next page
-        if (deliveries.isNotEmpty()) {
-            lastLoadedPage++
+
+        lastLoadedPage = deliveries.page
+
+        if(deliveries.delivery!!.isEmpty())
+        {
+            isLastPageReached = true
+
+            if(deliveries.page == 1)
+            {
+                _emptyListView.value = true
+            }
+        }else
+        {
             _emptyListView.value = false
             checkInternetConnection()
             _deliveryResult.value = deliveries
-
-        } else {
-
-            if (lastLoadedPage == 0) {
-                _emptyListView.value = true
-
-            } else {
-                _emptyListView.value = false
-                isLastPageReached = true
-            }
         }
     }
 
@@ -107,7 +110,6 @@ class DeliveryListViewModel(
 
         if (lastLoadedPage == 0)
             _noInternetOrError.value = true
-
     }
 
 
@@ -119,7 +121,7 @@ class DeliveryListViewModel(
     ) {
 
         if (!isLastPageReached && !loadingAlready && visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
-            initiateDeliveryListFetch()
+            initiateDeliveryListFetch(lastLoadedPage + 1)
         }
     }
 
@@ -127,7 +129,7 @@ class DeliveryListViewModel(
     fun retryClicked() {
 
         _noInternetOrError.value = false
-        initiateDeliveryListFetch()
+        initiateDeliveryListFetch(page = 1)
 
     }
 

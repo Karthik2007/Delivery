@@ -20,12 +20,16 @@ class DeliveryRepository(
     private val connectionHandler: ConnectionHandler
 ) {
 
-    suspend fun getDeliveries(offset: Int): Either<Failure, List<Delivery>> = withContext(Dispatchers.IO) {
+    suspend fun getDeliveries(offset: Int): Either<Failure, DeliveryResponse> = withContext(Dispatchers.IO) {
         try {
             val response = deliveryApi.getDeliveryList(offset).execute()
 
             when (response.isSuccessful && response.body() != null) {
-                true -> Success(response.body()!!)
+                true -> {
+                    val returnedPage = (offset + DeliveryApi.ITEMS_PER_PAGE)/DeliveryApi.ITEMS_PER_PAGE // find out the returned page
+                    val deliveryResponse = DeliveryResponse(returnedPage, response.body()!!)
+                    Success(deliveryResponse)
+                }
                 false -> Error(Failure.ServerError)
             }
         } catch (exception: Throwable) {

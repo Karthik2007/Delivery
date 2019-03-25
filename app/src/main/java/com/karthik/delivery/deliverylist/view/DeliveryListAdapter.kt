@@ -47,7 +47,27 @@ class DeliveryListAdapter(private val listener: OnItemClickListener) :
         }
     }
 
-    fun loadItems(items: List<Delivery>?) {
+    /**
+     * setting up fresh data
+     *
+     * happens on pull to refresh or first time load
+     */
+    fun setItems(items: List<Delivery>?)
+    {
+        items?.let {
+            deliveryList = items.toMutableList()
+            notifyDataSetChanged()
+        }
+    }
+
+    /**
+     *
+     * Add more items to the existing list
+     *
+     * happens on pagination scenario
+     *
+     */
+    fun loadMoreItems(items: List<Delivery>?) {
         items?.let {
             deliveryList.addAll(items)
             notifyItemRangeInserted(deliveryList.size, items.size)
