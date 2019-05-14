@@ -1,9 +1,10 @@
 package com.karthik.delivery.deliverylist.di
 
+import com.karthik.delivery.base.db.DeliveryDatabase
 import com.karthik.delivery.base.network.ApiConfiguration
 import com.karthik.delivery.base.network.ConnectionHandler
-import com.karthik.delivery.deliverylist.data.DeliveryApi
-import com.karthik.delivery.deliverylist.data.DeliveryRepository
+import com.karthik.delivery.deliverylist.data.api.DeliveryApi
+import com.karthik.delivery.deliverylist.data.repo.DeliveryRepository
 import dagger.Module
 import dagger.Provides
 
@@ -19,7 +20,7 @@ class DeliveryModule {
     }
 
     @Provides
-    fun providesDeliveryRepository(deliveryApi: DeliveryApi, connectionHandler: ConnectionHandler): DeliveryRepository {
-        return DeliveryRepository(deliveryApi, connectionHandler)
+    fun providesDeliveryRepository(deliveryApi: DeliveryApi, database: DeliveryDatabase, connectionHandler: ConnectionHandler): DeliveryRepository {
+        return DeliveryRepository(deliveryApi, database, connectionHandler)
     }
 }

@@ -1,17 +1,17 @@
 package com.karthik.delivery.deliveryList.viewmodel
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.Observer
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import com.karthik.delivery.base.network.ConnectionHandler
 import com.karthik.delivery.base.util.Either
 import com.karthik.delivery.deliveryList.util.testLifecycleOwner
 import com.karthik.delivery.deliverylist.data.Delivery
-import com.karthik.delivery.deliverylist.data.DeliveryRepository
+import com.karthik.delivery.deliverylist.data.DeliveryResponse
+import com.karthik.delivery.deliverylist.data.repo.DeliveryRepository
 import com.karthik.delivery.deliverylist.viewmodel.DeliveryListViewModel
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -42,7 +42,7 @@ class DeliveryViewModelTest {
     private lateinit var mockNoInternetObserver: Observer<Boolean>
     private lateinit var mockOfflineDataObserver: Observer<Boolean>
     private lateinit var mockEmptyListObserver: Observer<Boolean>
-    private lateinit var mockDeliveryResultObserver: Observer<List<Delivery>>
+    private lateinit var mockDeliveryResultObserver: Observer<DeliveryResponse>
 
 
     @Before
@@ -153,7 +153,7 @@ class DeliveryViewModelTest {
     private fun testRule()
     {
         var deliveryResponse: List<Delivery> = mock()
-        given { runBlocking { mockRepository.getDeliveries(0) } }.willReturn(Either.Success(deliveryResponse))
+        given { runBlocking { mockRepository.getDeliveries(0) } }.willReturn(Either.Success(DeliveryResponse(1,deliveryResponse)))
         given { deliveryResponse.isNotEmpty() }.willReturn(true)
     }
 

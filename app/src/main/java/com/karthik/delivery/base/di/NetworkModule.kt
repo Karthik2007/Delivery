@@ -42,7 +42,7 @@ class NetworkModule {
         baseInterceptor: BaseInterceptor,
         cacheInterceptor: CacheInterceptor
     ): ApiConfiguration {
-        return ApiConfiguration(baseApplication.applicationContext, baseInterceptor, cacheInterceptor)
+        return ApiConfiguration(baseApplication.applicationContext, baseInterceptor)
     }
 
 }

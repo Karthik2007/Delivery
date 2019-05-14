@@ -1,6 +1,7 @@
 package com.karthik.delivery.base.di
 
 import com.karthik.delivery.base.BaseApplication
+import com.karthik.delivery.base.db.DeliveryDatabase
 import com.karthik.delivery.base.navigation.AppNavigator
 import com.karthik.delivery.base.network.ApiConfiguration
 import com.karthik.delivery.base.network.ConnectionHandler
@@ -23,6 +24,8 @@ interface AppComponent {
     val baseApplication: BaseApplication
 
     val appNavigator: AppNavigator
+
+    val database: DeliveryDatabase
 
     val connectionHandler: ConnectionHandler
 

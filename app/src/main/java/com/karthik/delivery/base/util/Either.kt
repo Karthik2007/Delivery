@@ -31,6 +31,7 @@ sealed class Either<out L, out R> {
             is Error -> fnL(a)
             is Success -> fnR(b)
         }
+
 }
 
 // Credits to Alex Hart -> https://proandroiddev.com/kotlins-nothing-type-946de7d464fb

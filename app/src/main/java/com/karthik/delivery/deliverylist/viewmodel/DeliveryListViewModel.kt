@@ -1,13 +1,12 @@
 package com.karthik.delivery.deliverylist.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.karthik.delivery.base.network.ConnectionHandler
 import com.karthik.delivery.base.util.Failure
-import com.karthik.delivery.deliverylist.data.Delivery
-import com.karthik.delivery.deliverylist.data.DeliveryApi
-import com.karthik.delivery.deliverylist.data.DeliveryRepository
+import com.karthik.delivery.deliverylist.data.api.DeliveryApi
+import com.karthik.delivery.deliverylist.data.repo.DeliveryRepository
 import com.karthik.delivery.deliverylist.data.DeliveryResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -69,7 +68,7 @@ class DeliveryListViewModel(
     private fun getDeliveries(page: Int) {
         uiScope.launch {
 
-            val result = deliveryRepository.getDeliveries((page -1) * DeliveryApi.ITEMS_PER_PAGE)
+            val result = deliveryRepository.getDeliveries((page -1) * DeliveryRepository.ITEMS_PER_PAGE)
 
             result.either(::handleFetchDeliveriesFailure, ::handleFetchDeliveriesSuccess)
 

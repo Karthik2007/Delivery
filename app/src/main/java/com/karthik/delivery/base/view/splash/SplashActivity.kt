@@ -1,11 +1,11 @@
 package com.karthik.delivery.base.view.splash
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.karthik.delivery.R
 import com.karthik.delivery.deliverylist.view.DeliveryListActivity
 import kotlinx.android.synthetic.main.activity_splash.*

@@ -1,11 +1,12 @@
 package com.karthik.delivery.deliveryList.data
 
+import com.karthik.delivery.base.db.DeliveryDatabase
 import com.karthik.delivery.base.network.ConnectionHandler
 import com.karthik.delivery.base.util.Either
 import com.karthik.delivery.base.util.Failure
 import com.karthik.delivery.deliverylist.data.Delivery
-import com.karthik.delivery.deliverylist.data.DeliveryApi
-import com.karthik.delivery.deliverylist.data.DeliveryRepository
+import com.karthik.delivery.deliverylist.data.api.DeliveryApi
+import com.karthik.delivery.deliverylist.data.repo.DeliveryRepository
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -26,6 +27,7 @@ class DeliveryRepositoryTest
 
     //mocks
     private lateinit var mockDeliveryApi: DeliveryApi
+    private lateinit var mockDeliveryDatabase: DeliveryDatabase
     private lateinit var mockConnectionHandler: ConnectionHandler
     private lateinit var mockDeliveryResponse: Response<List<Delivery>>
     private lateinit var mockDeliveryCall: Call<List<Delivery>>
@@ -38,8 +40,10 @@ class DeliveryRepositoryTest
         mockConnectionHandler = mock()
         mockDeliveryResponse = mock()
         mockDeliveryCall = mock()
+        mockDeliveryDatabase = mock()
 
-        deliveryRepository = DeliveryRepository(mockDeliveryApi, mockConnectionHandler)
+        deliveryRepository =
+            DeliveryRepository(mockDeliveryApi, mockDeliveryDatabase, mockConnectionHandler)
     }
 
 
@@ -49,7 +53,7 @@ class DeliveryRepositoryTest
 
         var deliveryResponse: List<Delivery> = mock()
         given { mockConnectionHandler.isConnected }.willReturn(true)
-        given { mockDeliveryApi.getDeliveryList(0) }.willReturn(mockDeliveryCall)
+        given { mockDeliveryApi.getDeliveryList(0,20) }.willReturn(mockDeliveryCall)
         given { mockDeliveryCall.execute() }.willReturn(mockDeliveryResponse)
         given { mockDeliveryResponse.body() }.willReturn(deliveryResponse)
         given { mockDeliveryResponse.isSuccessful }.willReturn(true)
@@ -58,7 +62,7 @@ class DeliveryRepositoryTest
 
         runBlocking {
             val response = deliveryRepository.getDeliveries(0)
-            verify(mockDeliveryApi).getDeliveryList(0)
+            verify(mockDeliveryApi).getDeliveryList(0,20)
             response shouldEqual Either.Success(deliveryResponse)
         }
 
@@ -69,12 +73,12 @@ class DeliveryRepositoryTest
     fun getDeliveries_whenError()
     {
         given{ mockConnectionHandler.isConnected }.willReturn(true)
-        given { mockDeliveryApi.getDeliveryList(0) }.willReturn(mockDeliveryCall)
+        given { mockDeliveryApi.getDeliveryList(0,20) }.willReturn(mockDeliveryCall)
 
 
         runBlocking {
             val response = deliveryRepository.getDeliveries(0)
-            verify(mockDeliveryApi).getDeliveryList(0)
+            verify(mockDeliveryApi).getDeliveryList(0,20)
             response shouldEqual Either.Error(Failure.ServerError)
         }
     }
@@ -84,12 +88,12 @@ class DeliveryRepositoryTest
     {
 
         given{ mockConnectionHandler.isConnected }.willReturn(true)
-        given { mockDeliveryApi.getDeliveryList(0) }.willReturn(mockDeliveryCall)
+        given { mockDeliveryApi.getDeliveryList(0,20) }.willReturn(mockDeliveryCall)
         given { mockDeliveryCall.execute() }.willReturn(mockDeliveryResponse)
 
         runBlocking {
             val response = deliveryRepository.getDeliveries(0)
-            verify(mockDeliveryApi).getDeliveryList(0)
+            verify(mockDeliveryApi).getDeliveryList(0,20)
             response shouldEqual Either.Error(Failure.ServerError)
         }
     }

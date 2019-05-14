@@ -1,9 +1,9 @@
 package com.karthik.delivery.deliverylist.viewmodel
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.karthik.delivery.base.network.ConnectionHandler
-import com.karthik.delivery.deliverylist.data.DeliveryRepository
+import com.karthik.delivery.deliverylist.data.repo.DeliveryRepository
 import javax.inject.Inject
 
 

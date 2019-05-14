@@ -1,11 +1,11 @@
 package com.karthik.delivery.deliverylist.view
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.karthik.delivery.R
 import com.karthik.delivery.base.util.OnItemClickListener
 import com.karthik.delivery.base.util.loadImage

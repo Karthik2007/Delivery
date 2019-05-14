@@ -1,6 +1,9 @@
 package com.karthik.delivery.deliverylist.data
 
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 
@@ -8,11 +11,12 @@ import kotlinx.android.parcel.Parcelize
  * created by Karthik A on 09/03/19
  */
 @Parcelize
+@Entity
 data class Delivery(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val description: String,
     val imageUrl: String,
-    val location: Location
+    @Embedded val location: Location
 ) : Parcelable
 
 @Parcelize
