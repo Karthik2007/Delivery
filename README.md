@@ -1,10 +1,22 @@
 # Delivery
-Android application using MVVM, Dagger2, Android Architecture Components, Data binding and Retrofit.
+Delivery is an Android application which is created for showcasing the updated way of doing things in Android. On the shell, it is a two page app to show list of location items and map to locate. This MVVM based application uses wide variety of components across various layers for segregation, data flow consitency and scalability. 
+
+-> MVVM (Base arch and data flow model)
+
+-> Dagger2 (Dependency Injection)
+
+-> Android Architecture Components
+
+-> Data binding
+
+-> Room (persistence storage library)
+
+-> Retrofit (Networking)
 
 This aplication is completely written in kotlin using ModelViewViewModel architecture.
 
 
-ScreenShots
+ScreenShot
 -----------
 ![Dark](screenshots/Screenshot_dark.png)
 
