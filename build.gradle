@@ -5,12 +5,13 @@ buildscript {
     ext.dagger_version = '2.21'
     ext.glide_version = '4.9.0'
     ext.retrofit_version = '2.5.0'
+    ext.room_version = '2.1.0-beta01'
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
