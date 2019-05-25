@@ -3,7 +3,7 @@ Delivery is an Android application which is created for showcasing the updated w
 
 -> MVVM (Base arch and data flow model)
 
--> Dagger2 (Dependency Injection)
+-> Dagger2 (Dependency Injection w/ Android injector)
 
 -> Android Architecture Components
 
