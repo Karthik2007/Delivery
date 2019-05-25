@@ -7,6 +7,10 @@ import com.karthik.delivery.base.network.ApiConfiguration
 import com.karthik.delivery.base.network.ConnectionHandler
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 
@@ -16,8 +20,8 @@ import javax.inject.Singleton
  * created by Karthik A on 09/03/19
  */
 @Singleton
-@Component(modules = [AppModule::class, NetworkModule::class])
-interface AppComponent {
+@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuilder::class, AppModule::class, NetworkModule::class])
+interface AppComponent: AndroidInjector<DaggerApplication> {
 
     val apiConfiguration: ApiConfiguration
 
@@ -38,6 +42,9 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun injectAppDependencies(baseApplication: BaseApplication)
+
+    fun inject(baseApplication: BaseApplication)
+
+    override fun inject(instance: DaggerApplication?)
 
 }

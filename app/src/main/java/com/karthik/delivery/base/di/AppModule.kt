@@ -1,5 +1,7 @@
 package com.karthik.delivery.base.di
 
+import android.app.Application
+import android.content.Context
 import com.karthik.delivery.base.BaseApplication
 import com.karthik.delivery.base.db.DeliveryDatabase
 import com.karthik.delivery.base.navigation.AppNavigator
@@ -14,6 +16,12 @@ import javax.inject.Singleton
  */
 @Module
 class AppModule {
+
+    @Provides
+    @Singleton
+    fun provideContext(application: Application): Context {
+        return application
+    }
 
     @Singleton
     @Provides

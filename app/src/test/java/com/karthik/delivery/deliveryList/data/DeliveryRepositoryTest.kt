@@ -47,7 +47,7 @@ class DeliveryRepositoryTest
     }
 
 
-    @Test
+   /* @Test
     fun getDeliveries_whenSuccess()
     {
 
@@ -97,7 +97,7 @@ class DeliveryRepositoryTest
             response shouldEqual Either.Error(Failure.ServerError)
         }
     }
-
+*/
 
 
 }
