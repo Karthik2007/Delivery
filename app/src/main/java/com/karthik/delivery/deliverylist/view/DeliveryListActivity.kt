@@ -3,23 +3,21 @@ package com.karthik.delivery.deliverylist.view
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.karthik.delivery.R
-import com.karthik.delivery.base.BaseApplication
 import com.karthik.delivery.base.navigation.AppNavigator
 import com.karthik.delivery.base.util.OnItemClickListener
 import com.karthik.delivery.deliverylist.data.Delivery
-import com.karthik.delivery.deliverylist.di.DaggerDeliveryComponent
 import com.karthik.delivery.deliverylist.viewmodel.DeliveryListViewModel
 import com.karthik.delivery.deliverylist.viewmodel.DeliveryListViewModelFactory
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_delivery.*
 import javax.inject.Inject
 
-class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
+class DeliveryListActivity : DaggerAppCompatActivity(), OnItemClickListener {
 
 
     private lateinit var deliveryListViewModelFactory: DeliveryListViewModelFactory
@@ -30,8 +28,6 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delivery)
-
-        initDagger()
 
         deliveryListViewModel =
             ViewModelProviders.of(this, deliveryListViewModelFactory).get(DeliveryListViewModel::class.java)
@@ -129,15 +125,6 @@ class DeliveryListActivity : AppCompatActivity(), OnItemClickListener {
         appNavigator.goToDeliveryMapActivity(this, data as Delivery)
     }
 
-    /**
-     * Helper functions
-     */
-    private fun initDagger() {
-        DaggerDeliveryComponent.builder()
-            .appComponent((application as BaseApplication).appComponent)
-            .build()
-            .injectDependencies(this)
-    }
 
     @Inject
     fun setDependencies(deliveryListViewModelFactory: DeliveryListViewModelFactory, appNavigator: AppNavigator) {
